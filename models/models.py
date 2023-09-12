@@ -1,6 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, TIMESTAMP, JSON, ForeignKey
-from sqlalchemy.orm import declarative_base, sessionmaker
-# from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy import Column, Integer, String, TIMESTAMP, JSON, ForeignKey
+from sqlalchemy.orm import declarative_base
 from datetime import datetime
 
 Base = declarative_base()
@@ -31,6 +30,7 @@ class User(Base):
         return f"""Role :{self.id}, {self.email}, {self.username}, {self.password},
                         {self.registered_at}, {self.role_id}"""
 
+### НО ВЕСЬ ЭТОТ БЛОК НЕ НУЖЕН ТАК МЫ С ПМОЩЬЮ МИГРАЦИЙ СОЗДАЕМ МОДЕЛИ И Т.Д.
 # Создаем соединение с базой данных
 # engine = create_engine('postgresql://fedonyuk:fedonyuk@127.0.0.1/postgres03')
 
