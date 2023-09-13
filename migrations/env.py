@@ -13,7 +13,7 @@ from config import DB_HOST, DB_PORT, DB_USER, DB_NAME, DB_PASS
 # access to the values within the .ini file in use.
 config = context.config
 
-section = config.config_ini_section
+section = config.config_ini_section         # По советам СтекОверфлоу
 config.set_section_option(section, "DB_HOST", DB_HOST)
 config.set_section_option(section, "DB_PORT", DB_PORT)
 config.set_section_option(section, "DB_USER", DB_USER)
