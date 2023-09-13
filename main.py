@@ -74,5 +74,6 @@ def get_trades(trades: list[Trade]):
 
 
 
+
 # if __name__ == "__main__":
 #     run('main:app', reload=True)      # Метод не предпочтителен так как релоэд не происходит быстро!!!
