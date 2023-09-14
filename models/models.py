@@ -6,7 +6,7 @@ Base = declarative_base()
 
 
 class Role(Base):
-    __tablename__ = 'roles'
+    __tablename__ = 'role'
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -17,7 +17,7 @@ class Role(Base):
 
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)
