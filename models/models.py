@@ -1,44 +1,27 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP, JSON, ForeignKey
-from sqlalchemy.orm import declarative_base
 from datetime import datetime
 
-Base = declarative_base()
+from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey, JSON, Boolean
 
+metadata = MetaData()
 
-class Role(Base):
-    __tablename__ = 'role'
+role = Table(
+    "role",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String, nullable=False),
+    Column("permissions", JSON),
+)
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    permissions = Column(JSON)
-
-    def __repr__(self) -> str:
-        return f"Role :{self.id}, {self.name}, {self.permissions}"
-
-
-class User(Base):
-    __tablename__ = 'user'
-
-    id = Column(Integer, primary_key=True)
-    email = Column(String, nullable=False)
-    username = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    registered_at = Column(TIMESTAMP, default=datetime.utcnow)
-    role_id = Column(Integer, ForeignKey('roles.id'))
-
-    def __repr__(self) -> str:
-        return f"""Role :{self.id}, {self.email}, {self.username}, {self.password},
-                        {self.registered_at}, {self.role_id}"""
-
-
-
-### НО ВЕСЬ ЭТОТ БЛОК НЕ НУЖЕН ТАК МЫ С ПМОЩЬЮ МИГРАЦИЙ СОЗДАЕМ МОДЕЛИ И Т.Д.
-# Создаем соединение с базой данных
-# engine = create_engine('postgresql://fedonyuk:fedonyuk@127.0.0.1/postgres03')
-
-# Создаем таблицы в базе данных
-# Base.metadata.create_all(engine)
-
-# Создаем сессию для работы с базой данных
-# Session = sessionmaker(bind=engine)
-# session = Session()
+user = Table(
+    "user",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("email", String, nullable=False),
+    Column("username", String, nullable=False),
+    Column("registered_at", TIMESTAMP, default=datetime.utcnow),
+    Column("role_id", Integer, ForeignKey(role.c.id)),
+    Column("hashed_password", String, nullable=False),
+    Column("is_active", Boolean, default=True, nullable=False),
+    Column("is_superuser", Boolean, default=False, nullable=False),
+    Column("is_verified", Boolean, default=False, nullable=False),
+)
