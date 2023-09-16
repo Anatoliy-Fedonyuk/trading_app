@@ -6,7 +6,7 @@ from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, s
 from src.auth.models import User
 from src.auth.utils import get_user_db
 
-from config import SECRET_AUTH
+from src.config import SECRET_AUTH
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
@@ -17,10 +17,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         print(f"User {user.id} has registered.")
 
     async def create(
-        self,
-        user_create: schemas.UC,
-        safe: bool = False,
-        request: Optional[Request] = None,
+            self,
+            user_create: schemas.UC,
+            safe: bool = False,
+            request: Optional[Request] = None,
     ) -> models.UP:
         await self.validate_password(user_create.password, user_create)
 
@@ -46,4 +46,3 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
-
