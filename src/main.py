@@ -1,10 +1,9 @@
-import uvicorn
 from fastapi import FastAPI
 
-from auth.base_config import auth_backend, fastapi_users
-from auth.schemas import UserRead, UserCreate
+from src.auth.base_config import auth_backend, fastapi_users
+from src.auth.schemas import UserRead, UserCreate
 
-from operations.router import router as router_operation
+from src.operations.router import router as router_operation
 
 app = FastAPI(
     title="Trading App"
@@ -24,5 +23,9 @@ app.include_router(
 
 app.include_router(router_operation)
 
+
 if __name__ == "__main__":
-    uvicorn.run(app, reload=True)
+    from uvicorn import run
+
+    run("src.main:app", reload=True)
+
