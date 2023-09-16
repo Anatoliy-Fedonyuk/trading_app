@@ -1,5 +1,8 @@
-import os
 import sys
+import os
 
-# sys.path.append(os.path.join(sys.path[0], 'src'))
-sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
+# Получаем путь к текущему каталогу (корневому каталогу проекта)
+project_root = os.path.abspath(os.path.dirname(__file__))
+
+# Добавляем корневой каталог проекта в sys.path
+sys.path.insert(0, project_root)

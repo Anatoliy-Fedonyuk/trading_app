@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 
 from auth.base_config import auth_backend, fastapi_users
@@ -22,3 +23,6 @@ app.include_router(
 )
 
 app.include_router(router_operation)
+
+if __name__ == "__main__":
+    uvicorn.run(app, reload=True)
