@@ -5,4 +5,5 @@ fastapi-users[sqlalchemy]
 python-dotenv~=1.0.0
 sqlalchemy~=2.0.20
 uvicorn~=0.23.2
-pydantic
+pydantic~=2.2.0
+redis~=4.6.0
