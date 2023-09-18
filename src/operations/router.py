@@ -15,11 +15,14 @@ router = APIRouter(
 @router.get("")
 async def get_specific_operations(operation_type: str, session: AsyncSession = Depends(get_async_session)):
     try:
-        query = select(operation).where(operation.c.type == operation_type)
+        query = select(operation).filter(operation.c.type == operation_type)
         result = await session.execute(query)
+        rows = result.fetchall()
+        columns = result.keys()
+        records = [dict(zip(columns, row)) for row in rows]
         return {
             "status": "success",
-            "data": result.all(),
+            "data": records,
             "details": None
         }
     except Exception:
