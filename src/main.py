@@ -37,3 +37,4 @@ if __name__ == "__main__":
     from uvicorn import run
 
     run("src.main:app", reload=True)
+    # uvicorn src.main:app --reload
