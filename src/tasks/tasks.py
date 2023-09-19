@@ -35,3 +35,7 @@ def send_email_report_dashboard(username: str):
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
         server.login(SMTP_USER, SMTP_PASSWORD)
         server.send_message(email)
+
+# celery -A src.tasks.tasks:celery worker --loglevel=INFO --pool=solo
+# celery -A src.tasks.tasks:celery flower --loglevel=INFO --pool=solo
+
