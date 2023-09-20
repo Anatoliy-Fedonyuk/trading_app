@@ -38,9 +38,6 @@ async def startup():
 if __name__ == "__main__":
     from uvicorn import run
 
-    run("src.main:app", reload=True)
-    # uvicorn src.main:app --reload
-
     # Запуск Celery worker
     celery_worker_command = [
         "celery", "-A", "src.tasks.tasks:celery", "worker",
@@ -52,3 +49,5 @@ if __name__ == "__main__":
         "celery", "-A", "src.tasks.tasks:celery", "flower", ]
     subprocess.run(celery_flower_command)
 
+    run("src.main:app", reload=True)
+    # uvicorn src.main:app --reload
