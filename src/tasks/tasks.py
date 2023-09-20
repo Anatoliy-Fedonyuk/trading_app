@@ -1,6 +1,5 @@
 import smtplib
 from email.message import EmailMessage
-
 from celery import Celery
 
 from src.config import SMTP_PASSWORD, SMTP_USER
@@ -37,5 +36,4 @@ def send_email_report_dashboard(username: str):
         server.send_message(email)
 
 # celery -A src.tasks.tasks:celery worker --loglevel=INFO --pool=solo
-# celery -A src.tasks.tasks:celery flower --loglevel=INFO --pool=solo
-
+# celery -A src.tasks.tasks:celery flower
