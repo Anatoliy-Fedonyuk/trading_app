@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
-import subprocess
 
 from src.auth.base_config import auth_backend, fastapi_users
 from src.auth.schemas import UserRead, UserCreate
@@ -37,17 +36,6 @@ async def startup():
 
 if __name__ == "__main__":
     from uvicorn import run
-
-    # Запуск Celery worker
-    celery_worker_command = [
-        "celery", "-A", "src.tasks.tasks:celery", "worker",
-        "--loglevel=INFO", "--pool=solo", ]
-    subprocess.run(celery_worker_command)
-
-    # Запуск Celery Flower
-    celery_flower_command = [
-        "celery", "-A", "src.tasks.tasks:celery", "flower", ]
-    subprocess.run(celery_flower_command)
 
     run("src.main:app", reload=True)
     # uvicorn src.main:app --reload
