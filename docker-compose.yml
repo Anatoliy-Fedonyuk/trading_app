@@ -17,7 +17,7 @@ services:
     container_name: REDIS
     restart: always
     ports:
-      - '6379:6379'  # Redis обычно слушает порт 6379
+      - '6379:6379'
 
   test_db:
     image: postgres:14
