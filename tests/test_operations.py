@@ -40,7 +40,7 @@ async def test_get_specific_operations(ac: AsyncClient, cache_initialized):
     assert len(response_cached.json()["data"]) == 1
 
     # Сравниваем время выполнения
-    print(f'{second_request_duration=} < {first_request_duration=}')
+    print(f'\n {second_request_duration=} < {first_request_duration=}')
     assert second_request_duration < first_request_duration
 
 
