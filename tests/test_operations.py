@@ -1,5 +1,6 @@
 import pytest, time
 from httpx import AsyncClient
+from fastapi_cache.decorator import cache
 
 from tests.conftest import cache_initialized
 
