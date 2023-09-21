@@ -52,6 +52,7 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
             "data": None,
             "details": str(ex)})
 
+
 # @router.get("/main") # Глупость какая-то
 # async def main(session: AsyncSession = Depends(get_async_session)):
 #     result = await session.execute(select(1))
