@@ -3,7 +3,8 @@ from fastapi.templating import Jinja2Templates
 
 from src.operations.router import get_specific_operations
 
-router = APIRouter(prefix="/pages", tags=["Pages"])
+router = APIRouter(prefix="/pages",
+                   tags=["Pages"])
 
 templates = Jinja2Templates(directory="templates")
 
