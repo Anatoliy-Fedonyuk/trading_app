@@ -1,5 +1,6 @@
 import sys
 import os
+from database import metadata
 
 # Получаем путь к текущему каталогу (корневому каталогу проекта)
 project_root = os.path.abspath(os.path.dirname(__file__))

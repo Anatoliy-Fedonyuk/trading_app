@@ -15,7 +15,7 @@ app = FastAPI(
     title="Trading App"
 )
 
-app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),

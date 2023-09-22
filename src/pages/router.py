@@ -6,7 +6,7 @@ from src.operations.router import get_specific_operations
 router = APIRouter(prefix="/pages",
                    tags=["Pages"])
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="src/templates")
 
 
 @router.get("/base")
