@@ -35,7 +35,7 @@ app.include_router(router_tasks)
 app.include_router(router_pages)
 app.include_router(router_chat)
 
-origins = ["http://localhost:3000", ]
+origins = ['http://localhost:3000', ]
 
 app.add_middleware(
     CORSMiddleware,

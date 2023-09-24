@@ -1,3 +1,5 @@
+from typing import List, Sequence
+
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from pydantic import BaseModel
 from sqlalchemy import insert, select
@@ -7,13 +9,15 @@ from src.chat.models import Messages
 from src.chat.schemas import MessagesModel
 from src.database import async_session_maker, get_async_session
 
-router = APIRouter(prefix="/chat",
-                   tags=["Chat"])
+router = APIRouter(
+    prefix="/chat",
+    tags=["Chat"]
+)
 
 
 class ConnectionManager:
     def __init__(self):
-        self.active_connections: list[WebSocket] = []
+        self.active_connections: List[WebSocket] = []
 
     async def connect(self, websocket: WebSocket):
         await websocket.accept()
@@ -47,7 +51,7 @@ manager = ConnectionManager()
 @router.get("/last_messages")
 async def get_last_messages(
         session: AsyncSession = Depends(get_async_session),
-) -> list[MessagesModel]:
+) -> Sequence[Messages]:
     query = select(Messages).order_by(Messages.id.desc()).limit(5)
     messages = await session.execute(query)
     return messages.scalars().all()
