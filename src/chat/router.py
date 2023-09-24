@@ -1,4 +1,11 @@
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
+from pydantic import BaseModel
+from sqlalchemy import insert, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.chat.models import Messages
+# from src.chat.schemas import MessagesModel
+from src.database import async_session_maker, get_async_session
 
 router = APIRouter(prefix="/chat",
                    tags=["Chat"])
@@ -18,9 +25,20 @@ class ConnectionManager:
     async def send_personal_message(self, message: str, websocket: WebSocket):
         await websocket.send_text(message)
 
-    async def broadcast(self, message: str):
+    async def broadcast(self, message: str, add_to_db: bool):
+        if add_to_db:
+            await self.add_messages_to_database(message)
         for connection in self.active_connections:
             await connection.send_text(message)
+
+    @staticmethod
+    async def add_messages_to_database(message: str):
+        async with async_session_maker() as session:
+            stmt = insert(Messages).values(
+                message=message
+            )
+            await session.execute(stmt)
+            await session.commit()
 
 
 manager = ConnectionManager()
