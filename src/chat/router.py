@@ -49,7 +49,9 @@ manager = ConnectionManager()
 
 
 @router.get("/last_messages")
-async def get_last_messages(session: AsyncSession = Depends(get_async_session),):
+async def get_last_messages(
+        session: AsyncSession = Depends(get_async_session),
+) -> List[MessagesModel]:
     query = select(Messages).order_by(Messages.id.desc()).limit(5)
     messages = await session.execute(query)
     return messages.scalars().all()
