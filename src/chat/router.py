@@ -1,4 +1,4 @@
-from typing import List, Sequence
+from typing import List
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
 from pydantic import BaseModel
@@ -49,9 +49,7 @@ manager = ConnectionManager()
 
 
 @router.get("/last_messages")
-async def get_last_messages(
-        session: AsyncSession = Depends(get_async_session),
-) -> Sequence[Messages]:
+async def get_last_messages(session: AsyncSession = Depends(get_async_session),):
     query = select(Messages).order_by(Messages.id.desc()).limit(5)
     messages = await session.execute(query)
     return messages.scalars().all()
