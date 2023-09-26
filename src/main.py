@@ -56,5 +56,5 @@ async def startup_event():
 if __name__ == "__main__":
     from uvicorn import run
 
-    run("src.main:app", reload=True)
+    run("src.main:app", reload=True, workers=4)
     # uvicorn src.main:app --reload
