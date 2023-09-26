@@ -9,5 +9,6 @@ class Messages(Base):
     id = Column(Integer, primary_key=True)
     messages = Column(String(length=1024), nullable=False)
 
-    # def as_dict(self):
-    #     return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
