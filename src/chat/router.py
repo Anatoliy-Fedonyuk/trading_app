@@ -39,7 +39,7 @@ class ConnectionManager:
     async def add_messages_to_database(message: str):
         async with async_session_maker() as session:
             stmt = insert(Messages).values(
-                message=message
+                messages=message
             )
             await session.execute(stmt)
             await session.commit()
