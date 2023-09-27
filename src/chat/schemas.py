@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class MessagesModel(BaseModel):
     id: int
-    messages: str
+    message: str
 
     class Config:
         orm_mode = True
