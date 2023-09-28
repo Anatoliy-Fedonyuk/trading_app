@@ -10,7 +10,7 @@ from src.chat.schemas import MessagesModel
 from src.database import async_session_maker, get_async_session
 
 router = APIRouter(
-    prefix="pages/chat",
+    prefix="/chat",
     tags=["Chat"]
 )
 
@@ -54,8 +54,7 @@ async def get_last_messages(
 ) -> List[MessagesModel]:
     query = select(Messages).order_by(Messages.id.desc()).limit(5)
     messages = await session.execute(query)
-    messages_list = [MessagesModel(id=msg.id, messages=msg.messages) for msg in messages.scalars().all()]
-    return messages_list
+    return messages.scalars().all()
 
 
 @router.websocket("/ws/{client_id}")
