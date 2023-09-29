@@ -51,12 +51,3 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
             "status": "error",
             "data": None,
             "details": str(ex)})
-
-
-# @router.get("/main") # Глупость какая-то
-# async def main(session: AsyncSession = Depends(get_async_session)):
-#     result = await session.execute(select(1))
-#     rows = result.fetchall()
-#     columns = result.keys()
-#     records = [dict(zip(columns, row)) for row in rows]
-#     return records
