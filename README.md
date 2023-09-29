@@ -1,1 +1,1 @@
-# trading_app
+# This is my "trading_app"
