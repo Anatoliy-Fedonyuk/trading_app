@@ -3,6 +3,8 @@ from fastapi import APIRouter, BackgroundTasks, Depends
 from src.auth.base_config import current_user
 from src.tasks.tasks import send_email_report_dashboard
 
+
+
 router = APIRouter(prefix="/report", tags=["Report"])
 
 
