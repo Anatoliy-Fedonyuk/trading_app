@@ -5,6 +5,7 @@ from src.auth.models import role
 from conftest import client, async_session_maker
 
 
+
 async def test_add_role():
     async with async_session_maker() as session:
         stmt = insert(role).values(id=1, name="admin", permissions=None)
@@ -14,6 +15,7 @@ async def test_add_role():
         query = select(role)
         result = await session.execute(query)
         assert result.all() == [(1, 'admin', None)], "Роль не добавилась"
+
 
 
 def test_register():
@@ -28,6 +30,7 @@ def test_register():
     })
 
     assert response.status_code == 201
+
 
 
 if __name__ == '__main__':
