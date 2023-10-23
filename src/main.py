@@ -12,11 +12,14 @@ from src.tasks.router import router as router_tasks
 from src.pages.router import router as router_pages
 from src.chat.router import router as router_chat
 
+
 app = FastAPI(
     title="Trading App"
 )
 
+
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
@@ -24,18 +27,22 @@ app.include_router(
     tags=["Auth"],
 )
 
+
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix="/auth",
     tags=["Auth"],
 )
 
+
 app.include_router(router_operation)
 app.include_router(router_tasks)
 app.include_router(router_pages)
 app.include_router(router_chat)
 
+
 origins = ['http://localhost:3000', ]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -51,6 +58,7 @@ app.add_middleware(
 async def startup_event():
     redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+
 
 
 if __name__ == "__main__":
